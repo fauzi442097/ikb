@@ -16,11 +16,11 @@ class AdminAccess
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->check() && auth()->user()->type == 'admin')  {
+        if (auth()->check() && auth()->user()->role_id == 1)  {
             return $next($request);
         } else{
             auth()->logout();
-            return redirect()->route('admin.login');
+            return redirect()->route('admin.index_login');
         }
     }
 }
