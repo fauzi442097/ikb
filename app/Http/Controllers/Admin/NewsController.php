@@ -9,6 +9,8 @@ use DB;
 use Log;
 use App\Models\News;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
+
 
 
 class NewsController extends Controller
@@ -23,7 +25,8 @@ class NewsController extends Controller
 
     public function create(Request $request)
     {
-        return view('admin.news.create');
+        $param['news'] = null;
+        return view('admin.news.create', $param);
     }
 
     public function store(Request $request)
@@ -31,10 +34,10 @@ class NewsController extends Controller
 
         $arrData = $request->validate([
             'news_id' => 'nullable',
-            'news_thumbnail' => 'required_without:news_id',
             'news_title' => 'required|max:100',
             'news_category' => 'required',
-            'news_content' => 'required|min:3'
+            'news_content' => 'required|min:3',
+            'published' => 'nullable'
         ], [
             'required' => 'Wajib diisi',
             'max' => 'Maksimal diisi :max karakter',
@@ -45,20 +48,27 @@ class NewsController extends Controller
         DB::beginTransaction();
         try {
 
-            if ( isset($arrData['news_thumbnail'])) {
-                $file = $arrData['news_thumbnail'];
+
+            if ( isset($request->news_thumbnail)) {
+
+                if ( !is_null($arrData['news_id'])) {
+                    // Remove file existing
+                    $news = News::where('id', $arrData['news_id'])->first();
+                    $this->removeFile(public_path($news->thumbnail));
+                }
+
+                $file = $request->news_thumbnail;
                 $extFile = $file->extension();
                 $newFileName = time() . date('Ymd') . '.' . $extFile;
                 $destPath = 'news-img/' . $newFileName;
-                $this->uploadImage($arrData['news_thumbnail'], $destPath);
+                $this->uploadImage($request->news_thumbnail, $destPath);
                 $arrData['thumbnail'] = $destPath;
             }
-
 
             $slug = Str::slug($arrData['news_title'], '-');
             $arrData['slug'] = $slug;
             $arrData['author_id'] = auth()->user()->id;
-            $arrData['published'] = $published = isset($arrData['published']);
+            $arrData['published'] = isset($arrData['published']);
 
             if ( is_null($arrData['news_id'])) {
                 News::store($arrData);
@@ -83,7 +93,19 @@ class NewsController extends Controller
                     ->withInput($request->input())
                     ->with('error', 'Terjadi kesalahan pada server');
         }
+    }
 
+    public function show(Request $request, $id)
+    {
+        $news = News::with(['comments', 'category', 'author'])->where('id', $id)->first();
+        $param['news'] = $news;
+        return view('admin.news.detail', $param);
+    }
 
+    public function update(Request $request, $id)
+    {
+        $news = News::with(['comments', 'category', 'author'])->where('id', $id)->first();
+        $param['news'] = $news;
+        return view('admin.news.create', $param);
     }
 }

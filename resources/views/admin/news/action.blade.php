@@ -3,14 +3,24 @@
 <script type="text/javascript">
     var form = document.querySelector("#form-news");
     var fv;
+    var news = {!! json_encode($news) !!};
+
+    @if (\Session::has('error'))
+        showAlert('error', '{{ \Session::get('error') }}', 'Error');
+    @endif
+
 
     $(document).ready(function() {
         initTinyMCE();
         initValidationForm();
 
-        @if (\Session::has('error'))
-            showAlert('error', '{{ \Session::get('error') }}', 'Error');
-        @endif
+        if ( news ) {
+            // Update 
+            fv.disableValidator('news_thumbnail', 'notEmpty');
+            $('#news_content').html(news.content);
+            $("#news_category").val(news.category_id).trigger('change.select2');
+            $("#published").prop('checked', news.published);
+        }
     });
 
     window.livewire.on('categoryCreated', () => {
@@ -114,4 +124,5 @@
         $("#modal-category").modal('show');
         $("#form-create-category")[0].reset();
     }
+
 </script>

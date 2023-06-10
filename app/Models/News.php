@@ -21,9 +21,14 @@ class News extends Model
         return $this->hasMany(NewsTags::class, 'news_id');
     }
 
-    public function author(): BelongsTo
+    public function author()
     {
         return $this->belongsTo(User::class, 'author_id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
     public static function getDataById($id)

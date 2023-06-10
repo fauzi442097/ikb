@@ -23,11 +23,22 @@
 
         <div class="row">
 
+            @if ($errors->any())
+                <div class="alert alert-danger d-flex align-items-center p-5 mb-10">
+                    <i class="ki-duotone ki-shield-tick fs-2hx text-danger me-4"><span class="path1"></span><span class="path2"></span></i>                    
+                    <div class="d-flex flex-column">
+                        <h4 class="mb-1 text-danger">Invalid Input</h4>
+                        @foreach ($errors->all() as $error)
+                            <span>{{$error}}</span>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
 
             <form id="form-news" class="form d-flex flex-column flex-lg-row gap-7 gap-lg-10" method="POST" action="{{ route('admin.news.store') }}" enctype="multipart/form-data">
                 @csrf
 
-                <x-forms.input type="hidden" name="news_id"/>
+                <x-forms.input type="hidden" name="news_id" value="{{ !is_null($news) ? $news->id : '' }}"/>
                 <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px">
                     <div class="card card-flush py-4">
                         <div class="card-header">
@@ -36,7 +47,13 @@
                             </div>
                         </div>
                         <div class="card-body text-center pt-0 fv-row">
-                            <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" style="background-image: url({{ asset('assets/media/svg/files/blank-image.svg') }})">
+                            <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" 
+                                @if ( is_null($news))
+                                    style="background-image: url({{ asset('assets/media/svg/files/blank-image.svg') }})"
+                                @else 
+                                    style="background-image: url({{ asset($news->thumbnail) }})"
+                                @endif
+                            >
                                 <div class="image-input-wrapper w-150px h-150px"></div>
                                 <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
                                     <i class="bi bi-pencil-fill fs-7"></i>
@@ -87,7 +104,6 @@
                                     </label>
                                 </div>
                             </div>
-                            {{-- <div class="text-muted fs-7"> Tambahkan tag ke dalam berita.</div> --}}
                         </div>
                     </div>
                 </div>
@@ -99,7 +115,8 @@
                                     <div class="card-body">
                                         <div class="mb-10 fv-row">
                                             <x-forms.label> Judul Berita </x-forms.label>
-                                            <x-forms.input name="news_title" maxLength="100"/>
+                                            <x-forms.input name="news_title" maxLength="100" value="{{ !is_null($news) ? $news->title : '' }}"/>
+
                                         </div>
                                         <div class="fv-row">
                                             <x-forms.label> Konten Berita </x-forms.label>
@@ -128,9 +145,5 @@
     <x-slot name="script">
        @include('admin.news.action')
     </x-slot>
-
-
-
-
  </x-layout.index>
 
