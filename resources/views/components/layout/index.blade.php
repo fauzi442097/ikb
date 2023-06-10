@@ -65,8 +65,10 @@
 		<!--end::Scrolltop-->
 
 		<!--begin::Javascript-->
+        @livewireScripts
         <x-layout.script/>
-        {{ $script }}
+        {{ isset($script) ? $script : ''}}
+
 
 	</body>
 	<!--end::Body-->

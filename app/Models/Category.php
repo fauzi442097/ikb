@@ -9,6 +9,11 @@ class Category extends Model
 {
     use HasFactory;
     protected $table = 'categories';
+    public $timestamps = false;
+
+    public function scopeOrderNewestId($query) {
+        $query->orderBy('id', 'DESC');
+    }
 
     protected $guarded = [];
 }

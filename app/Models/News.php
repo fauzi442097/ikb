@@ -11,6 +11,7 @@ class News extends Model
 
     protected $table = 'news';
     protected $guarded = [];
+    public $timestamps = false;
 
     public function comments() {
         return $this->hasMany(Comment::class, 'news_id');
@@ -23,6 +24,42 @@ class News extends Model
     public function author(): BelongsTo
     {
         return $this->belongsTo(User::class, 'author_id');
+    }
+
+    public static function getDataById($id)
+    {
+        $model = new Static;
+        return $model->where('id', $id)->first();
+    }
+
+    public static function store($arrData)
+    {
+        $model = new Static;
+        $model->title = $arrData['news_title'];
+        $model->content = $arrData['news_content'];
+        $model->thumbnail = $arrData['thumbnail'];
+        $model->category_id = $arrData['news_category'];
+        $model->published = $arrData['published'];
+        $model->author_id = $arrData['author_id'];
+        $model->created_at = date('Y-m-d H:i:s');
+        $model->user_crt_id = $arrData['author_id'];
+        $model->slug = $arrData['slug'];
+        $model->save();
+    }
+
+    public static function updateData($newsId, $arrData)
+    {
+        $model = self::getDataById($newsId);
+        $model->title = $arrData['news_title'];
+        $model->content = $arrData['news_content'];
+        if ( isset($arrData['thumbnail']) ) $model->thumbnail = $arrData['thumbnail'];
+        $model->category_id = $arrData['news_category'];
+        $model->published = $arrData['published'];
+        $model->author_id = $arrData['author_id'];
+        $model->updated_at = date('Y-m-d H:i:s');
+        $model->user_upd_id = $arrData['author_id'];
+        $model->slug = $arrData['slug'];
+        $model->save();
     }
 
 }

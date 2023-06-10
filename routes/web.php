@@ -15,3 +15,4 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/', [GuestController::class, 'index']);
 
+Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);

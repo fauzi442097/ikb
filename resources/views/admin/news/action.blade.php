@@ -1,0 +1,117 @@
+<script src="{{ asset('assets/plugins/custom/tinymce/tinymce.bundle.js') }}"></script>
+
+<script type="text/javascript">
+    var form = document.querySelector("#form-news");
+    var fv;
+
+    $(document).ready(function() {
+        initTinyMCE();
+        initValidationForm();
+
+        @if (\Session::has('error'))
+            showAlert('error', '{{ \Session::get('error') }}', 'Error');
+        @endif
+    });
+
+    window.livewire.on('categoryCreated', () => {
+        $("#modal-category").modal('hide');
+        showAlert('success', 'Kategori berhasil ditambahkan', 'Sukses');
+        Livewire.emit('renderCategories'); // call listener render category
+    });
+
+    function initTinyMCE () {
+        var options = {
+            selector: "#news_content",
+            height : "300",
+            menubar: false,
+            toolbar: ["styleselect fontselect fontsizeselect",
+                "undo redo | cut copy | bold italic | link image | alignleft aligncenter alignright alignjustify",
+                "bullist numlist | outdent indent | blockquote subscript superscript | advlist | autolink | lists charmap | preview "],
+            plugins : "advlist autolink link image lists charmap print preview code",
+            setup: function (editor) {
+                editor.on('keyup', function () {
+                    fv.revalidateField('news_content');
+                });
+            },
+        };
+        tinymce.init(options);
+    }
+
+    function initValidationForm() {
+        fv = FormValidation.formValidation(form, {
+                fields: {
+                    news_thumbnail: {
+                        validators: {
+                            notEmpty: {
+                                message: "Upload thumbnail berita"
+                            },
+                            file: {
+                                extension: 'png,jpg,jpeg',
+                                type: 'image/png,image/jpeg,image/jpg',
+                                maxSize: (5*1024) * 1024, // 10MB
+                                message: 'Format file tidak valid atau ukuran file terlalu besar',
+                            },
+                        }
+                    },
+                    news_title: {
+                        validators: {
+                            notEmpty: {
+                                message: "Wajib diisi"
+                            },
+                            stringLength: {
+                                max: 100,
+                                message: 'Maksimal diisi 100 karakter',
+                            },
+                        }
+                    },
+                    news_category: {
+                        validators: {
+                            notEmpty: {
+                                message: "Pilih kategori berita"
+                            }
+                        }
+                    },
+                    news_content: {
+                        validators: {
+                            callback: {
+                                message: 'Konten diisi minimal 3 karakter',
+                                callback: function (value) {
+                                    // Get the plain text without HTML
+                                    const text = tinyMCE.activeEditor.getContent({
+                                        format: 'text',
+                                    });
+                                    return text.length >= 3;
+                                },
+                            },
+                        }
+                    },
+                },
+                plugins: {
+                    trigger: new FormValidation.plugins.Trigger,
+                    bootstrap: new FormValidation.plugins.Bootstrap5({
+                        rowSelector: ".fv-row"
+                    })
+                }
+        });
+    }
+
+    function revalidateSelect2(elm, fv) {
+        fv.revalidateField($(elm).attr('name'));
+    }
+
+    function validateForm() {
+        event.preventDefault();
+        fv.validate()
+        .then(function(status) {
+            if ( status == 'Valid') {
+                form.submit();
+            }
+        });
+    }
+
+    function showModalCategory() {
+        event.preventDefault();
+        $("#modal-category").modal('show');
+        $("#form-create-category")[0].reset();
+    }
+</script>

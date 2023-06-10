@@ -17,7 +17,7 @@
             <!--end::Aside  toggle-->
             <!--begin::Logo-->
             <a href="../../demo14/dist/index.html">
-                <img alt="Logo" src="assets/media/logos/logo-2.svg" class="h-25px h-lg-30px" />
+                <img alt="Logo" src="{{ asset('assets/media/logos/logo-2.svg') }}" class="h-25px h-lg-30px" />
             </a>
             <!--end::Logo-->
         </div>
@@ -39,7 +39,7 @@
                         <!--end::Name-->
                         <!--begin::Symbol-->
                         <div class="symbol symbol-30px symbol-md-40px">
-                            <img src="assets/media/avatars/150-26.jpg" alt="image" />
+                            <img src="{{ asset('assets/media/avatars/150-26.jpg') }}" alt="image" />
                         </div>
                         <!--end::Symbol-->
                     </div>
@@ -51,7 +51,7 @@
                             <div class="menu-content d-flex align-items-center px-3">
                                 <!--begin::Avatar-->
                                 <div class="symbol symbol-50px me-5">
-                                    <img alt="Logo" src="assets/media/avatars/150-26.jpg" />
+                                    <img alt="Logo" src="{{ asset('assets/media/avatars/150-26.jpg') }}" />
                                 </div>
                                 <!--end::Avatar-->
                                 <!--begin::Username-->
