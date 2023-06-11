@@ -4,6 +4,8 @@
     var form = document.querySelector("#form-news");
     var fv;
     var news = {!! json_encode($news) !!};
+    var input1 = document.querySelector("#news_tags");
+    var tagify;
 
     @if (\Session::has('error'))
         showAlert('error', '{{ \Session::get('error') }}', 'Error');
@@ -13,14 +15,20 @@
     $(document).ready(function() {
         initTinyMCE();
         initValidationForm();
+        initTagify();
 
         if ( news ) {
-            // Update 
+            // Update
             fv.disableValidator('news_thumbnail', 'notEmpty');
             $('#news_content').html(news.content);
             $("#news_category").val(news.category_id).trigger('change.select2');
             $("#published").prop('checked', news.published);
+            var newsTags = news.tags.map((item) => {
+                return item.tag_name;
+            });
+            tagify.addTags(newsTags);
         }
+
     });
 
     window.livewire.on('categoryCreated', () => {
@@ -45,6 +53,19 @@
             },
         };
         tinymce.init(options);
+    }
+
+    function initTagify() {
+        tagify = new Tagify(input1, {
+            whitelist: ["Sepakbola", "Hiburan", "Masyarakat", "Hobi", "Organisasi", "Ulang tahun"],
+            maxTags: 10,
+            dropdown: {
+                maxItems: 20,           // <- mixumum allowed rendered suggestions
+                classname: "tagify__inline__suggestions", // <- custom classname for this dropdown, so it could be targeted
+                enabled: 0,             // <- show suggestions on focus
+                closeOnSelect: false    // <- do not hide the suggestions dropdown once an item has been selected
+            }
+        });
     }
 
     function initValidationForm() {

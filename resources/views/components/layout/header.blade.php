@@ -1,4 +1,4 @@
-<div id="kt_header" class="header">
+<div id="kt_header" class="header bg-white">
     <!--begin::Container-->
     <div class="container-fluid d-flex flex-stack">
         <!--begin::Brand-->
@@ -16,8 +16,8 @@
             </div>
             <!--end::Aside  toggle-->
             <!--begin::Logo-->
-            <a href="../../demo14/dist/index.html">
-                <img alt="Logo" src="{{ asset('assets/media/logos/logo-2.svg') }}" class="h-25px h-lg-30px" />
+            <a href="{{ route('admin.home') }}">
+                <img alt="Logo" src="{{ asset('img/logo.jpg') }}" class="h-25px h-lg-45px" />
             </a>
             <!--end::Logo-->
         </div>
@@ -33,13 +33,13 @@
                     <div class="btn btn-flex align-items-center bg-hover-white bg-hover-opacity-10 py-2 px-2 px-md-3" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
                         <!--begin::Name-->
                         <div class="d-none d-md-flex flex-column align-items-end justify-content-center me-2 me-md-4">
-                            <span class="text-muted fs-8 fw-bold lh-1 mb-1">Max</span>
-                            <span class="text-white fs-8 fw-bolder lh-1">UX Designer</span>
+                            <span class="text-muted fs-7 fw-bold lh-1 mb-2">{{ auth()->user()->name }}</span>
+                            <span class="fs-8 fw-bolder lh-1">{{ auth()->user()->role_id }}</span>
                         </div>
                         <!--end::Name-->
                         <!--begin::Symbol-->
                         <div class="symbol symbol-30px symbol-md-40px">
-                            <img src="{{ asset('assets/media/avatars/150-26.jpg') }}" alt="image" />
+                            <img src="{{ asset('img/avatar_4.png') }}" alt="image" />
                         </div>
                         <!--end::Symbol-->
                     </div>
@@ -51,14 +51,13 @@
                             <div class="menu-content d-flex align-items-center px-3">
                                 <!--begin::Avatar-->
                                 <div class="symbol symbol-50px me-5">
-                                    <img alt="Logo" src="{{ asset('assets/media/avatars/150-26.jpg') }}" />
+                                    <img alt="Logo" src="{{ asset('img/avatar_4.png') }}" />
                                 </div>
                                 <!--end::Avatar-->
                                 <!--begin::Username-->
                                 <div class="d-flex flex-column">
-                                    <div class="fw-bolder d-flex align-items-center fs-5">Max Smith
-                                    <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Pro</span></div>
-                                    <a href="#" class="fw-bold text-muted text-hover-primary fs-7">max@kt.com</a>
+                                    <div class="fw-bolder d-flex align-items-center fs-5">{{ auth()->user()->name }}</div>
+                                    <a href="#" class="fw-bold text-muted text-hover-primary fs-7">{{ auth()->user()->email }}</a>
                                 </div>
                                 <!--end::Username-->
                             </div>

@@ -1,0 +1,29 @@
+* {
+    --color-primary : #36669A;
+    --color-secondary: #FDA05E;
+}
+
+.bg-primary-logo {
+    background-color: var(--color-primary) !important;
+}
+
+.bg-secondary-logo {
+    background-color: var(--color-secondary) !important;
+}
+
+.color-primary-logo {
+    color: var(--color-primary) !important;
+}
+
+.color-secondary-logo {
+    color: var(--color-secondary) !important;
+}
+
+.aside .aside-menu .menu .menu-item .menu-link:not(.active) .menu-title {
+    color: #fff !important;
+}
+
+.news-title:hover,
+.news-content:hover {
+    color: var(--color-primary) !important;
+}

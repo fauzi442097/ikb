@@ -9,7 +9,7 @@
 
 
     <x-layout.menu-item>
-        <a class="menu-link active" href="../../demo14/dist/index.html">
+        <a class="menu-link {{ request()->routeIs('admin.home') ? 'active' : '' }}" href="{{ route('admin.home') }}">
             <span class="menu-icon">
                 <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
                 <span class="svg-icon svg-icon-2">
@@ -32,10 +32,8 @@
        </div>
     </div>
 
-
-
     <x-layout.menu-item>
-        <a class="menu-link" href="{{ route('admin.news') }}">
+        <a class="menu-link {{ request()->routeIs('admin.news') || request()->is('admin/news/*')  ? 'active' : '' }}" href="{{ route('admin.news') }}">
             <span class="menu-icon">
                 <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo9/dist/../src/media/svg/icons/Design/Interselect.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -50,8 +48,9 @@
         </a>
     </x-layout.menu-item>
 
+
     <x-layout.menu-item>
-        <a class="menu-link" href="{{ route('admin.news-category') }}">
+        <a class="menu-link {{ request()->routeIs('admin.news-category') ? 'active' : '' }}" href="{{ route('admin.news-category') }}">
             <span class="menu-icon">
                 <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
                 <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo9/dist/../src/media/svg/icons/General/Duplicate.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">

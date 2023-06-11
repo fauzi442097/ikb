@@ -5,6 +5,7 @@ namespace App\Http\Livewire\News;
 use Livewire\Component;
 use App\Models\News;
 use Livewire\WithPagination;
+use Log;
 
 
 class NewsIndex extends Component
@@ -16,11 +17,11 @@ class NewsIndex extends Component
     protected $paginationTheme = 'bootstrap';
 
     protected $listeners = [
-        'deleteNews' => 'deleteNews', 
+        'deleteNews' => 'deleteNews',
         'renderNews' => 'getNews'
     ];
 
-    public function deleteNews(News $news) 
+    public function deleteNews(News $news)
     {
         try {
             $news->delete();

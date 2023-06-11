@@ -25,7 +25,7 @@
 
             @if ($errors->any())
                 <div class="alert alert-danger d-flex align-items-center p-5 mb-10">
-                    <i class="ki-duotone ki-shield-tick fs-2hx text-danger me-4"><span class="path1"></span><span class="path2"></span></i>                    
+                    <i class="ki-duotone ki-shield-tick fs-2hx text-danger me-4"><span class="path1"></span><span class="path2"></span></i>
                     <div class="d-flex flex-column">
                         <h4 class="mb-1 text-danger">Invalid Input</h4>
                         @foreach ($errors->all() as $error)
@@ -47,10 +47,10 @@
                             </div>
                         </div>
                         <div class="card-body text-center pt-0 fv-row">
-                            <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true" 
+                            <div class="image-input image-input-empty image-input-outline mb-3" data-kt-image-input="true"
                                 @if ( is_null($news))
                                     style="background-image: url({{ asset('assets/media/svg/files/blank-image.svg') }})"
-                                @else 
+                                @else
                                     style="background-image: url({{ asset($news->thumbnail) }})"
                                 @endif
                             >
@@ -92,8 +92,9 @@
                                 </span>Tambah kategori baru
                             </button>
                             <div class="fv-row mb-8">
-                                <x-forms.label> Tag Berita  </x-forms.label>
+                                <x-forms.label> Tag Berita <span class="fs-7 text-muted"> (opsional) </span> </x-forms.label>
                                 <x-forms.input name="news_tags"/>
+                                <span class="text-muted mt-2 d-inline-block fs-8"> Maksimal 10 tag </span>
                             </div>
 
                             <div class="fv-row">

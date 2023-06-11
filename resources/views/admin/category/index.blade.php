@@ -6,7 +6,7 @@
     <x-slot name="content">
 
        <div class="d-flex flex-wrap flex-stack mb-6">
-          <h3 class="fw-bolder my-2"> Kategori Berita </h3>
+          <h1 class="fw-bolder my-2"> Kategori Berita </h1>
           <div class="d-flex align-items-center my-2">
              <button onclick="showModal('create')" class="btn btn-primary btn-sm">Tambah Kategori</button>
           </div>

@@ -15,6 +15,11 @@ class NewsCategoryInput extends Component
         $this->categories = Category::OrderNewestId()->get();
     }
 
+    public function updating()
+    {
+        $this->getCategories();
+    }
+
     public function mount()
     {
         $this->getCategories();

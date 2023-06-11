@@ -8,6 +8,7 @@ use App\Traits\uploadFile;
 use DB;
 use Log;
 use App\Models\News;
+use App\Models\Tags;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
@@ -65,15 +66,20 @@ class NewsController extends Controller
                 $arrData['thumbnail'] = $destPath;
             }
 
+
             $slug = Str::slug($arrData['news_title'], '-');
             $arrData['slug'] = $slug;
             $arrData['author_id'] = auth()->user()->id;
             $arrData['published'] = isset($arrData['published']);
 
             if ( is_null($arrData['news_id'])) {
-                News::store($arrData);
+                $newsInserted = News::store($arrData);
             } else {
-                News::updateData($arrData['news_id'], $arrData);
+                $newsInserted = News::updateData($arrData['news_id'], $arrData);
+            }
+
+            if ( isset($request->news_tags)) {
+                $this->storeTags($request->news_tags, $newsInserted);
             }
 
             DB::commit();
@@ -104,8 +110,32 @@ class NewsController extends Controller
 
     public function update(Request $request, $id)
     {
-        $news = News::with(['comments', 'category', 'author'])->where('id', $id)->first();
+        $news = News::with(['comments', 'category', 'author', 'tags'])->where('id', $id)->first();
         $param['news'] = $news;
         return view('admin.news.create', $param);
+    }
+
+    public function storeTags($tags, $newsInserted)
+    {
+        $newsTags = json_decode($tags);
+
+        DB::TABLE('news_tags')->where('news_id', $newsInserted->id)->delete();
+
+        foreach ( $newsTags as $item ) {
+            $tag = Tags::whereRaw("LOWER(tag_name)='" . strtolower($item->value) . "'")->first();
+            if ( is_null($tag)) {
+                $tag = Tags::create([
+                    'tag_name' => $item->value,
+                    'user_crt_id' => auth()->user()->id
+                ]);
+            }
+
+            // Insert Pivot Tabel
+            DB::TABLE('news_tags')->insert([
+                'news_id' => $newsInserted->id,
+                'tags_id' => $tag->id
+            ]);
+
+        }
     }
 }

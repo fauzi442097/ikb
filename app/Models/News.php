@@ -17,8 +17,9 @@ class News extends Model
         return $this->hasMany(Comment::class, 'news_id');
     }
 
-    public function tags() {
-        return $this->hasMany(NewsTags::class, 'news_id');
+    public function tags()
+    {
+        return $this->belongsToMany(Tags::class, 'news_tags', 'news_id', 'tags_id');
     }
 
     public function author()
@@ -50,6 +51,7 @@ class News extends Model
         $model->user_crt_id = $arrData['author_id'];
         $model->slug = $arrData['slug'];
         $model->save();
+        return $model;
     }
 
     public static function updateData($newsId, $arrData)
@@ -65,6 +67,7 @@ class News extends Model
         $model->user_upd_id = $arrData['author_id'];
         $model->slug = $arrData['slug'];
         $model->save();
+        return $model;
     }
 
 }
