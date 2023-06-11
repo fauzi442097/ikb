@@ -2,10 +2,8 @@
 <div>
    <div class="row g-6 g-xl-9">
       @forelse ($news as $item)
-      {{-- onclick="window.location.href='{{ route('admin.news.show', ['id' => $item->id]) }}'" --}}
       <div class="col-sm-6 col-xl-3">
          <div class="card h-100">
-
             <div class="card-header flex-nowrap border-0 p-0 w-100 overflow-hidden">
                <div class="card-title m-0 w-100 position-relative">
                   <img src="{{ asset($item->thumbnail) }}" alt="news-thumbnail-{{ $item->id }}" class="w-100" style="height: 230px;object-fit: cover;"/>
