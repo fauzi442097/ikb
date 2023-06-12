@@ -38,6 +38,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function scopeRoleMember($query) {
+        return $query->where('role_id', 2);
+    }
+
     public function news() {
         return $this->hasMany(News::class, 'author_id');
     }

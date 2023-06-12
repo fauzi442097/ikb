@@ -2,7 +2,8 @@
 
 @section('guest-content')
 <div class="d-flex gap-2">
-    <i class="la la-newspaper-o fs-4x icon color-primary-logo font-bold"></i>
+    <i class="bi bi-stack fs-2x icon color-primary-logo fw-bold"></i>
+
     <h3 class="color-primary-logo align-self-center mt-2"> Berita </h3>
 </div>
 
@@ -16,7 +17,7 @@
             <img src="{{ asset($item->thumbnail) }}" alt="news-img" class="list-news-img"/>
         </div>
         <div>
-            <p class="mb-2 fs-6 fw-bold title-news"> {{ $item->title }} </p>
+            <h4 class="mb-2 title-news"> {{ $item->title }} </h4>
             <div class="d-flex gap-4 fs-8">
                 <div class="info-news">
                     <i class="fas fa-user"></i>

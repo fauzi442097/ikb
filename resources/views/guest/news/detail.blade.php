@@ -25,6 +25,20 @@
         <p class="text-muted fs-6 mt-4 mb-4"> Komentar ({{ count($news->comments) }}) </p>
         <div class="py-8 px-4 mb-8 rounded-2 d-flex flex-column gap-6" style="background: #F4F4F4" class="w-100">
 
+            <div class="d-flex gap-2">
+                <div class="rounded-1 w-100 py-4">
+                    <div class="d-flex align-items-center gap-1">
+                        <p class="fw-bold mb-1"> {{ auth()->user()->name }} </p>
+                    </div>
+                    <div>
+                        <textarea class="form-control mb-2" placeholder="Berikan tanggapan" rows="4"></textarea>
+                        <div class="text-end w-100">
+                            <button class="btn btn-primary btn-sm"> Kirim </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             @foreach ( $news->comments as $item)
                 <div class="d-flex gap-2">
                     <div class="bg-white rounded-1 w-100 px-4 py-4">
@@ -34,7 +48,6 @@
                                 - {{ $item->created_at->diffForHumans() }}
                             </span>
                         </div>
-
                         <div> {{ $item->comment }} </div>
                     </div>
                 </div>

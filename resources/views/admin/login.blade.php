@@ -32,7 +32,7 @@
 
 							<div class="fv-row mb-10">
 								<label class="form-label fs-6 fw-bolder text-dark">Username</label>
-								<input class="form-control form-control-lg form-control-solid @error('password') is-invalid @enderror" type="text" name="username" value="{{ old('username') }}" autocomplete="on" />
+								<input class="form-control form-control-lg form-control-solid @error('username') is-invalid @enderror" type="text" name="username" value="{{ old('username') }}" autocomplete="on" />
                                 @error('username')
                                     <x-alert-invalid-input> {{  $message }} </x-alert-invalid-input>
                                 @enderror
