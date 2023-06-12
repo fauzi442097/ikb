@@ -27,3 +27,34 @@
 .news-content:hover {
     color: var(--color-primary) !important;
 }
+
+.mobile-menu.active,
+.mobile-menu.active .icon {
+    color: var(--color-primary);
+    font-weight: bold;
+}
+
+.container-menu-mobile {
+    box-shadow: 0px 0px 10px 2px #efefef;
+}
+
+.list-news-img {
+    object-fit: cover;
+    width: 100%;
+    height: inherit;
+}
+
+.info-news {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.info-news i {
+    color: var(--color-primary);
+}
+
+.container-news-mobile:hover .title-news {
+    color: var(--color-primary);
+}

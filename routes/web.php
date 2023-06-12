@@ -13,6 +13,15 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/', [GuestController::class, 'index']);
+
+Route::name('guest.')->group(function() {
+    Route::get('/', [GuestController::class, 'index'])->name('home');
+
+    Route::prefix('news')->group(function() {
+        Route::get('/', [GuestController::class, 'indexNews'])->name('news');
+        Route::get('{slug}', [GuestController::class, 'detailNews'])->name('news.detail', ['slug' => 'slug']);
+    });
+});
+
 
 Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);

@@ -32,6 +32,11 @@ class News extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
+    public function scopePublished($query)
+    {
+        return $query->where('published', 't');
+    }
+
     public static function getDataById($id)
     {
         $model = new Static;
