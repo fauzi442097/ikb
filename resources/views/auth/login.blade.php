@@ -8,7 +8,7 @@
 				<div class="d-flex flex-column flex-lg-row-fluid">
 					<div class="d-flex flex-row-fluid flex-center p-10">
 						<div class="d-flex flex-column text-center text-md-start">
-							<a href="../../demo14/dist/index.html" class="mb-4 mb-md-10">
+							<a href="javascript:;" class="mb-4 mb-md-10">
 								<img alt="Logo" src="{{ asset('img/logo.jpg') }}" class="h-70px" />
 							</a>
 							<h1 class="text-dark fs-2x mb-3">Welcome, Member!</h1>
@@ -52,7 +52,7 @@
 							</div>
                             <div class="fv-row mt-lg-10 mt-4 text-end">
                                 <span class="form-check-label fw-bold text-gray-700">Belum punya akun?
-								<a href="#" class="link-primary ms-1">Daftar</a>.</span>
+								<a href="{{ route('register') }}" class="link-primary ms-1">Registrasi Member</a>.</span>
 							</div>
 						</form>
 					</div>
@@ -67,10 +67,7 @@
 
             $(document).ready(function() {
 
-                $('input').keypress(function (e) {
-                    if (e.which == 13) return login();
-                });
-
+        
                 @if (\Session::has('invalid'))
                     Swal.fire({
                         title: 'Login Gagal',

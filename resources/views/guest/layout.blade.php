@@ -7,9 +7,11 @@
 		<div class="container mt-8 overflow-auto" style="max-height: 100vh; margin-bottom: 70px;">
             @yield('guest-content')
             @include('guest.menu')
-            @yield('script')
         </div>
+
         <x-layout.script/>
+        @include('guest.script')
+        @yield('script')
 	</body>
 </html>
 

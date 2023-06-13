@@ -31,9 +31,9 @@
                         <p class="fw-bold mb-1"> {{ auth()->user()->name }} </p>
                     </div>
                     <div>
-                        <textarea class="form-control mb-2" placeholder="Berikan tanggapan" rows="4"></textarea>
+                        <textarea class="form-control mb-2" placeholder="Tambahkan komentar" rows="4" onkeyup="toggleButton(this)"></textarea>
                         <div class="text-end w-100">
-                            <button class="btn btn-primary btn-sm"> Kirim </button>
+                            <button class="btn btn-primary btn-sm" disabled id="btn-komentar" onclick="komentar();"> Komentar </button>
                         </div>
                     </div>
                 </div>
@@ -58,4 +58,18 @@
 @endsection
 
 @section('script')
+ <script type="text/javascript">
+    function toggleButton(elm) {
+        let value = $(elm).val();
+        if ( value == '' ) {
+            $("#btn-komentar").attr('disabled', 'disabled')
+        } else {
+            $("#btn-komentar").removeAttr('disabled');
+        }
+    }
+
+    function komentar() {
+        alert('Komentar')
+    }
+</script>
 @endsection

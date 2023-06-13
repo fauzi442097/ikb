@@ -10,4 +10,18 @@
 @endsection
 
 @section('script')
+    <script type="text/javascript">
+        @if (\Session::has('success'))
+            Swal.fire({
+                title: 'Registrasi Sukses',
+                html: 'Selamat Anda telah tergabung sebagai member IKB Silakan lengkapi data terlebih dahulu',
+                icon: "success",
+                buttonsStyling: !1,
+                confirmButtonText: "Ok",
+                customClass: {
+                    confirmButton: "btn btn-primary"
+                }
+            })
+        @endif
+    </script>
 @endsection
