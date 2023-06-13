@@ -107,13 +107,7 @@ class GuestController extends Controller
 
     public function detailNews(Request $request, $slug)
     {
-        $news = News::with('comments.user', 'category', 'author')
-                ->where('slug', $slug)
-                ->first();
-
-
-
-        $param['news'] = $news;
+        $param['slug'] = $slug;
         return view('guest.news.detail', $param);
     }
 }

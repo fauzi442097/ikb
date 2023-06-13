@@ -9,8 +9,9 @@ class Comment extends Model
 {
     use HasFactory;
     protected $table = 'comments';
-
     protected $guarded = [];
+
+
 
     public function users() {
         return $this->belongsTo(User::class, 'user_id');

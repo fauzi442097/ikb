@@ -2,6 +2,17 @@
 
 * {
     font-family: 'Roboto', sans-serif;
+    --bs-danger: #f1416c;
+    --bs-danger-light: #fff5f8;
 }
 
+.bg-guest-body {
+    background: #F3F5F9;
+}
+
+.alert-light-danger {
+    color: var(--bs-danger) !important;
+    border-color: var(--bs-danger) !important;
+    background-color: var(--bs-danger-light) !important;
+}
 
