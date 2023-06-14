@@ -13,8 +13,9 @@ class News extends Model
     protected $guarded = [];
     public $timestamps = false;
 
-    public function comments() {
-        return $this->hasMany(Comment::class, 'news_id');
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'news_id')->orderBy('id', 'DESC');
     }
 
     public function tags()

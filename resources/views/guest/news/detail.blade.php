@@ -30,6 +30,10 @@
             KTMenu.init();
         });
 
+        window.livewire.on('focus_input_comment', () => {
+            $("#edit-comment").focus();
+        });
+
 
     });
 
