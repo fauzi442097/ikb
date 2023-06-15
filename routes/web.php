@@ -20,6 +20,7 @@ Route::name('guest.')->group(function() {
     Route::middleware(['auth'])->group(function() {
         Route::get('/', [GuestController::class, 'index'])->name('home');
         Route::get('/home', [GuestController::class, 'index']);
+        Route::get('fill_data_member', [GuestController::class, 'indexFillDataMember'])->name('fill_data_member');
 
         Route::prefix('news')->group(function() {
             Route::get('/', [GuestController::class, 'indexNews'])->name('news');

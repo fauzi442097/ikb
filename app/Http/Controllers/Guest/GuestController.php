@@ -26,6 +26,17 @@ class GuestController extends Controller
         return view('guest.dashboard');
     }
 
+    public function indexFillDataMember(Request $request)
+    {
+
+        $members = Member::leftJoin('users', 'users.id', 'members.user_id')
+                    ->where('users.id', auth()->user()->id)
+                    ->first();
+
+        $param['member'] = $members;
+        return view('guest.fill_data_member', $param);
+    }
+
     public function login(Request $request)
     {
         $validated = $request->validate([
@@ -101,7 +112,6 @@ class GuestController extends Controller
                     ->paginate(10);
 
         $param['news'] = $news;
-
         return view('guest.news.index', $param);
     }
 

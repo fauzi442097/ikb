@@ -12,6 +12,12 @@
             {!! $news->content !!}
         </div>
 
+        <div class="mt-8">
+            @foreach ($news->tags as $tag)
+                <span class="badge badge-secondary">{{ $tag->tag_name }}</span>
+            @endforeach
+        </div>
+
         <p class="text-muted fs-6 mt-8 mb-4"> Komentar ({{ count($news->comments) }}) </p>
         <div class="mb-8 rounded-2 d-flex flex-column gap-6" class="w-100">
 

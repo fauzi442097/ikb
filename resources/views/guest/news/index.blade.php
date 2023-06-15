@@ -1,15 +1,17 @@
 @extends('guest.layout')
 
 @section('guest-content')
-<div class="d-flex gap-2">
-    <i class="bi bi-stack fs-2x icon color-primary-logo fw-bold"></i>
-
-    <h3 class="color-primary-logo align-self-center mt-2"> Berita </h3>
+<div class="d-flex align-items-center justify-content-between">
+    <div class="d-flex gap-2 align-items-center">
+        <i class="bi bi-layers fs-2x icon color-primary-logo fw-bold"></i>
+    </div>
+    <p class="color-primary-logo align-self-center mt-2 fs-2x fw-bolder"> Berita </p>
+    <img src="{{ asset('img/logo-transparent.png') }}" alt="logo-brand" class="h-40px">
 </div>
 
 <div class="d-flex flex-column gap-6 mt-8">
     @forelse ( $news as $item )
-    <div class="rounded-2 w-100 d-flex align-items-start gap-3 cursor-pointer container-news-mobile"
+    <div class="rounded-2 w-100 p-2 bg-white d-flex align-items-start gap-4 cursor-pointer container-news-mobile"
         onclick="window.location.href='{{ route('guest.news.detail', ['slug' => $item->slug]) }}'">
         <div class="h-60px w-80px bg-primary rounded-2 overflow-hidden" style="flex-basis: 80px;
         flex-grow: 0;

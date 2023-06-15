@@ -29,10 +29,9 @@ class NewsDetail extends Component
 
     public function getNewsBySlug($slug)
     {
-        // dd($slug);
         return News::with(['comments' => function($q) {
             $q->orderBy('id', 'DESC')->with('user');
-        }, 'category', 'author'])
+        }, 'category', 'author', 'tags'])
         ->where('slug', $slug)
         ->first();
     }
@@ -114,7 +113,6 @@ class NewsDetail extends Component
 
     public function render()
     {
-        // dump($this->getNewsBySlug($this->slug));
         return view('livewire.guest.news-detail', ['news' => $this->getNewsBySlug($this->slug)]);
     }
 }

@@ -16,3 +16,8 @@
     background-color: var(--bs-danger-light) !important;
 }
 
+.notification-finish-profile {
+    background: #fff;
+    border: 1px solid #36669A;
+}
+

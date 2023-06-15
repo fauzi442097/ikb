@@ -5,7 +5,7 @@
     <a href="{{ route('guest.news') }}" class="p-2 bg-white rounded-circle d-flex align-items-center justify-content-center">
         <i class="la la-arrow-left fs-2x icon color-primary-logo font-bold"></i>
     </a>
-    <img src="{{ asset('img/logo.jpg') }}" alt="logo-brand" class="h-40px">
+    <img src="{{ asset('img/logo-transparent.png') }}" alt="logo-brand" class="h-40px">
 </div>
 @livewire('guest.news-detail', ['slug' => $slug])
 @endsection
@@ -33,8 +33,6 @@
         window.livewire.on('focus_input_comment', () => {
             $("#edit-comment").focus();
         });
-
-
     });
 
     function setDisabledButtonComment() {
