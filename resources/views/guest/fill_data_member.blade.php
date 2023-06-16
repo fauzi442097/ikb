@@ -2,36 +2,30 @@
 
 @section('guest-content')
 <div class="d-flex align-items-center justify-content-between">
-    <div class="d-flex gap-2 align-items-center">
-        <i class="bi bi-house fs-2x icon color-primary-logo fw-bold"></i>
-    </div>
+    <a href="{{ $urlBack }}" class="p-2 bg-white rounded-circle d-flex align-items-center justify-content-center">
+        <i class="la la-arrow-left fs-2x icon color-primary-logo font-bold"></i>
+    </a>
     <p class="color-primary-logo align-self-center mt-2 fs-2x fw-bolder"> Data Member </p>
     <img src="{{ asset('img/logo-transparent.png') }}" alt="logo-brand" class="h-40px">
 </div>
 
 <div class="mt-8 bg-white rounded-3 p-8">
-    <form class="form" novalidate="novalidate" id="kt_free_trial_form" method="POST" action="{{ route('guest.login') }}">
-        @csrf
-        <div class="mb-4">
-            <h1 class="text-dark mb-3">Login</h1>
-        </div>
-        <div class="fv-row mb-6 mb-lg-10">
-            <label class="form-label text-dark fs-6">NIK</label>
-            <input class="form-control form-control-solid @error('nik') is-invalid @enderror" type="text" placeholder="" name="nik" value="{{ old('nik') }}" autocomplete="off" />
-            @error('nik')
-                <x-alert-invalid-input> {{  $message }} </x-alert-invalid-input>
-            @enderror
-        </div>
-        <div class="fv-row mb-6 mb-lg-10">
-            <label class="form-label text-dark fs-6">Nama Lengkap</label>
-            <input class="form-control form-control-solid @error('name') is-invalid @enderror" type="text" placeholder="" name="name" value="{{ old('username') }}" autocomplete="off" />
-            @error('name')
-                <x-alert-invalid-input> {{  $message }} </x-alert-invalid-input>
-            @enderror
-        </div>
-    </form>
+    @livewire('guest.form-fill-member', ['type' => $type])
 </div>
 @endsection
 
 @section('script')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            window.livewire.on('data_member_updated', (msg, nextRoute) => {
+                showAlertConfirm('success', 'Sukses', msg, 'Tutup', function(){
+                    window.location.href = nextRoute;
+                }, false);
+            });
+
+            window.livewire.on('re_render_form', () => {
+                reinitDatepicker();
+            });
+        });
+    </script>
 @endsection

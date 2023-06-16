@@ -7,7 +7,6 @@
         </div>
         <div class="d-flex flex-column justify-content-center align-items-center gap-1 mobile-menu">
             <i class="bi bi-grid-fill fs-3x icon"></i>
-
             Fitur
         </div>
         <div class="d-flex flex-column justify-content-center align-items-center gap-1 mobile-menu cursor-pointer {{ request()->routeIs('guest.news') || request()->is('news/*')  ? 'active' : '' }}"
@@ -15,7 +14,7 @@
             <i class="bi bi-layers-fill fs-3x icon"></i>
             Berita
         </div>
-        <div class="d-flex flex-column justify-content-center align-items-center gap-1 mobile-menu">
+        <div class="d-flex flex-column justify-content-center align-items-center gap-1 mobile-menu {{ request()->routeIs('guest.profile') ? 'active' : '' }}" onclick="window.location.href='{{ route('guest.profile') }}'">
             <i class="bi bi-person-fill fs-3x icon"></i>
             Profil
         </div>

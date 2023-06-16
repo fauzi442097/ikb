@@ -14,6 +14,7 @@
 
 <h2 class="mt-10 color-primary-logo"> Hi, {{ auth()->user()->name }} </h2>
 
+@if ( !$member->data_complete )
 <div class="d-flex justify-content-between align-items-center notification-finish-profile mt-4 rounded-3 py-2 px-4">
     <div>
         <p class="color-primary-logo fs-6 mb-1"> Anda belum mengkapi data keanggotaan</p>
@@ -21,6 +22,8 @@
     </div>
     <img src="{{ asset('img/not-finish-yet.png') }}" width="100"/>
 </div>
+@endif
+
 @endsection
 
 @section('script')

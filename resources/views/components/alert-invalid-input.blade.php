@@ -1,3 +1,3 @@
-<span class="invalid-feedback" role="alert">
+<span class="invalid-feedback d-block" role="alert">
     {{ $slot }}
 </span>

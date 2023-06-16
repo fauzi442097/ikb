@@ -16,8 +16,26 @@
     background-color: var(--bs-danger-light) !important;
 }
 
+
 .notification-finish-profile {
     background: #fff;
     border: 1px solid #36669A;
+}
+
+.menu-profile div:not(:first-child) {
+    border-top: 1px solid #e7e7e7;
+}
+
+
+.btn.btn-custom-primary {
+    color: #fff;
+    border-color: #36669A;
+    background-color: #36669A;
+}
+
+.btn.btn-custom-primary:hover {
+    color: #fff;
+    border-color: #284c74;
+    background-color: #284c74;
 }
 

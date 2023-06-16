@@ -23,17 +23,22 @@ class GuestController extends Controller
 
     public function index(Request $request)
     {
-        return view('guest.dashboard');
+        $param['member'] = Member::where('user_id', auth()->user()->id)->first();
+        return view('guest.dashboard', $param);
     }
 
     public function indexFillDataMember(Request $request)
     {
-
         $members = Member::leftJoin('users', 'users.id', 'members.user_id')
                     ->where('users.id', auth()->user()->id)
                     ->first();
 
+        $type = isset($request->type) ? $request->type : null;
+        $urlBack = $type == null ? route('guest.home') : route('guest.profile');
+
         $param['member'] = $members;
+        $param['type'] = $type;
+        $param['urlBack'] = $urlBack;
         return view('guest.fill_data_member', $param);
     }
 
@@ -52,6 +57,13 @@ class GuestController extends Controller
 
         Auth::loginUsingId($user->id);
         return redirect()->route('guest.home');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        return redirect()->route('guest.login');
     }
 
     public function register(Request $request)
@@ -119,5 +131,11 @@ class GuestController extends Controller
     {
         $param['slug'] = $slug;
         return view('guest.news.detail', $param);
+    }
+
+    public function profile(Request $request)
+    {
+        $param = [];
+        return view('guest.profile', $param);
     }
 }

@@ -15,12 +15,14 @@ Auth::routes();
 Route::name('guest.')->group(function() {
 
     Route::post('login', [GuestController::class, 'login'])->name('login');
+    Route::get('logout', [GuestController::class, 'logout'])->name('logout');
     Route::post('register', [GuestController::class, 'register'])->name('register');
 
     Route::middleware(['auth'])->group(function() {
         Route::get('/', [GuestController::class, 'index'])->name('home');
         Route::get('/home', [GuestController::class, 'index']);
         Route::get('fill_data_member', [GuestController::class, 'indexFillDataMember'])->name('fill_data_member');
+        Route::get('/profile', [GuestController::class, 'profile'])->name('profile');
 
         Route::prefix('news')->group(function() {
             Route::get('/', [GuestController::class, 'indexNews'])->name('news');

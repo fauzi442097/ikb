@@ -12,13 +12,13 @@
         });
     }
 
-    function showAlertConfirm(type, title, message, confirmText, callback)
+    function showAlertConfirm(type, title, message, confirmText, callback, cancelButton = true)
     {
         Swal.fire({
             title: title,
-            text: message,
+            html: message,
             icon: type,
-            showCancelButton: true,
+            showCancelButton: cancelButton,
             cancelButtonText: 'Batal',
             confirmButtonText: confirmText,
             customClass: {
@@ -34,5 +34,17 @@
                 }
             }
         })
+    }
+
+    $(document).ready(function() {
+        $(".input-date").flatpickr({
+            dateFormat:"d/m/Y"
+        })
+    });
+
+    function reinitDatepicker() {
+        $(".input-date").flatpickr({
+            dateFormat:"d/m/Y"
+        });
     }
 </script>
