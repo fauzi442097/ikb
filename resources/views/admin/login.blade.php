@@ -41,7 +41,8 @@
 								<div class="d-flex flex-stack mb-2">
 									<label class="form-label fw-bolder text-dark fs-6 mb-0">Password</label>
 								</div>
-								<input class="form-control form-control-lg form-control-solid @error('password') is-invalid @enderror" type="password" name="password" autocomplete="off" />
+                                <x-forms.input-password name="password" autocomplete="off" class="form-control-solid"/>
+								{{-- <input class="form-control form-control-lg form-control-solid @error('password') is-invalid @enderror" type="password" name="password" autocomplete="off" /> --}}
                                 @error('password')
                                     <x-alert-invalid-input> {{  $message }} </x-alert-invalid-input>
                                 @enderror

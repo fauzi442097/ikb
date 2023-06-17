@@ -79,6 +79,41 @@
                             <div class="fs-5 fw-bold text-gray-600">
                                 {!! $news->content !!}
                             </div>
+
+                            <div class="mt-8">
+                                @foreach ($news->tags as $tag)
+                                    <span class="badge badge-secondary">{{ $tag->tag_name }}</span>
+                                @endforeach
+                            </div>
+
+                            <p class="text-muted fs-6 mt-8">
+                                Komentar
+                                @if ( count($news->comments) > 0 )
+                                    ({{ count($news->comments) }})
+                                @else
+                                    (Belum ada kometar)
+                                @endif
+                            </p>
+
+                            <div class="d-flex flex-column mb-14 mt-10 gap-4">
+                                @foreach ( $news->comments as $value )
+                                    <div class="d-flex gap-2 px-8 py-4 flex-column rounded-3" style="box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;">
+                                        <p class="fw-bold mb-1 me-1 d-inline-block"> {{ $value->user->name }}
+                                            <span class="text-muted fs-8">
+                                                @if ($value->updated_at)
+                                                    {{ $value->updated_at->locale('id_ID')->diffForHumans() }} (diedit)
+                                                @else
+                                                    {{ $value->created_at->locale('id_ID')->diffForHumans() }}
+                                                @endif
+                                            </span>
+                                        </p>
+                                        <div>
+                                            {{ $value->comment }}
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+
                         </div>
                     </div>
                 </div>

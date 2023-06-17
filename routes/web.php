@@ -5,11 +5,6 @@ use Illuminate\Support\Facades\Route;
 // Route Admin
 Route::prefix('admin')->name('admin.')->group(__DIR__ . '/admin.php');
 
-// Route Guest
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Auth::routes();
 
 Route::name('guest.')->group(function() {
@@ -23,6 +18,8 @@ Route::name('guest.')->group(function() {
         Route::get('/home', [GuestController::class, 'index']);
         Route::get('fill_data_member', [GuestController::class, 'indexFillDataMember'])->name('fill_data_member');
         Route::get('/profile', [GuestController::class, 'profile'])->name('profile');
+        Route::get('account', [GuestController::class, 'account'])->name('account');
+        Route::get('myProfile', [GuestController::class, 'myProfile'])->name('myProfile');
 
         Route::prefix('news')->group(function() {
             Route::get('/', [GuestController::class, 'indexNews'])->name('news');

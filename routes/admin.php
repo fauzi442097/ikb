@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\NewsCategoryController;
+use App\Http\Controllers\Admin\MemberController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -12,6 +13,10 @@ Route::post('logout', [AdminController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth.admin'])->group(function () {
     Route::get('/', [AdminController::class, 'home'])->name('home');
+
+    Route::prefix('member')->group(function() {
+        Route::get('/', [MemberController::class, 'index'])->name('member');
+    });
 
     Route::prefix('news')->group(function() {
         Route::get('/', [NewsController::class, 'index'])->name('news');

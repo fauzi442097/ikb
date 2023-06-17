@@ -59,6 +59,15 @@ class CategoryForm extends Component
     public function storeCategory()
     {
         $validatedData = $this->validate();
+
+        // Validate Category Name incase sensitive
+        $category = Category::whereRaw("LOWER(name) ilike '%". $validatedData['categoryName']."%'")
+                        ->when (!is_null($validatedData['categoryId']), function($q) use($validatedData){
+                            return $q->where('id', '!=', $validatedData['categoryId']);
+                        })
+                        ->first();
+        if ( !empty($category) ) return $this->addError('categoryName', 'Nama kategori sudah tersedia');
+
         try {
             $this->storeData($validatedData);
             $this->emit('categoryCreated');

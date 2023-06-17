@@ -12,7 +12,6 @@ class NewsIndex extends Component
 {
     // public $news;
 
-
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 

@@ -103,7 +103,12 @@ class NewsController extends Controller
 
     public function show(Request $request, $id)
     {
-        $news = News::with(['comments', 'category', 'author'])->where('id', $id)->first();
+        $news = News::with(['category', 'author', 'tags'])
+                    ->with('comments', function($q) {
+                        $q->with('user');
+                    })
+                    ->where('id', $id)
+                    ->first();
         $param['news'] = $news;
         return view('admin.news.detail', $param);
     }

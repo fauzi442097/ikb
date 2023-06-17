@@ -47,4 +47,18 @@
             dateFormat:"d/m/Y"
         });
     }
+
+    function togglePassword(elm) {
+        let input_type = $(elm).siblings('input').attr('type');
+        if ( input_type == 'password' ) {
+            $(elm).siblings('input').attr('type', 'input');
+            $(elm).children('i.bi-eye-slash').addClass('d-none');
+            $(elm).children('i.bi-eye').removeClass('d-none');
+        } else {
+            $(elm).siblings('input').attr('type', 'password');
+            $(elm).children('i.bi-eye-slash').removeClass('d-none');
+            $(elm).children('i.bi-eye').addClass('d-none');
+        }
+
+    }
 </script>

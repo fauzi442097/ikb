@@ -23,6 +23,12 @@
 
     <div class="modal-footer">
         <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">Tutup</button>
-        <button type="submit" class="btn btn-primary btn-sm">Save changes</button>
+        <button type="submit" class="btn btn-primary btn-sm" wire:loading.attr="disabled">
+            <span wire:loading.class="d-none" class="indicator-label">Simpan</span>
+            <div wire:loading>
+                <span> Processing...
+                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+            </div>
+        </button>
     </div>
 </form>

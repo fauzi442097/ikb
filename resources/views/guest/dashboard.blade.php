@@ -7,9 +7,10 @@
     </div>
 
     <p class="color-primary-logo align-self-center mt-2 fs-2x fw-bolder"> Home </p>
-    <div>
+    <img src="{{ asset('img/logo-transparent.png') }}" alt="logo-brand" class="h-40px">
+    {{-- <div>
         <i class="bi bi-bell-fill fs-2x"></i>
-    </div>
+    </div> --}}
 </div>
 
 <h2 class="mt-10 color-primary-logo"> Hi, {{ auth()->user()->name }} </h2>

@@ -66,6 +66,13 @@
             <x-alert-invalid-input> {{  $message }} </x-alert-invalid-input>
         @enderror
     </div>
+    <div class="fv-row mb-6 mb-lg-10">
+        <label class="form-label text-dark fs-6">Username </label>
+        <x-forms.input name="username" wire:model.lazy="username" class="form-control-solid" minLength="3" maxLength="30" />
+        @error('username')
+            <x-alert-invalid-input> {{  $message }} </x-alert-invalid-input>
+        @enderror
+    </div>
 
     <div class="d-flex gap-2">
         <button type="submit" class="btn btn-custom-primary flex-grow-1" wire:loading.attr="disabled">

@@ -9,9 +9,13 @@
                     </svg>
                 </span>
             </div>
-            <a href="{{ route('admin.home') }}">
+            <a href="{{ route('admin.home') }}" >
                 <img alt="Logo" src="{{ asset('img/logo.jpg') }}" class="h-25px h-lg-45px" />
             </a>
+            <div style="margin-left: 10px;">
+                <p class="mb-0 fw-bolder color-primary-logo fs-4"> Ikatan Keluarga Balinka </p>
+                <span class="color-secondary-logo"> Jabodetabek </span>
+            </div>
         </div>
         <div class="d-flex align-items-center">
             <div class="d-flex align-items-center flex-shrink-0">

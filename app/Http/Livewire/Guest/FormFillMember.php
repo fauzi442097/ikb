@@ -19,6 +19,7 @@ class FormFillMember extends Component
     public $address;
     public $email;
     public $type;
+    public $username;
 
     public function formRules()
     {
@@ -29,7 +30,8 @@ class FormFillMember extends Component
             'birthDate' => 'required|date_format:d/m/Y',
             'phoneNo' => 'required|digits_between:10,15',
             'address' => 'required',
-            'email' => ['nullable', 'email', Rule::unique('users')->ignore(auth()->user()->id)]
+            'email' => ['nullable', 'email', Rule::unique('users')->ignore(auth()->user()->id)],
+            'username' => ['required', 'min:3', 'max:30', Rule::unique('users')->ignore(auth()->user()->id)]
         ];
     }
 
@@ -43,6 +45,9 @@ class FormFillMember extends Component
             'numeric' => 'Hanya boleh diisi angka',
             'email.email' => 'Email tidak valid',
             'email.unique' => 'Email sudah digunakan',
+            'min' => 'Minimal diisi :min karakter',
+            'max' => 'Maksimal diisi :max karakter',
+            'username.unique' => 'Username sudah digunakan'
         ];
     }
 
@@ -65,6 +70,7 @@ class FormFillMember extends Component
         if ( empty($dataMember)) {
             $this->name = auth()->user()->name;
             $this->email = auth()->user()->email;
+            $this->username = auth()->user()->username;
         } else {
             $this->nik = $dataMember->nik;
             $this->name = $dataMember->name;
@@ -73,6 +79,7 @@ class FormFillMember extends Component
             $this->phoneNo = $dataMember->phone_no;
             $this->address = $dataMember->address;
             $this->email = $dataMember->email;
+            $this->username = auth()->user()->username;
         }
     }
 
@@ -92,6 +99,7 @@ class FormFillMember extends Component
                      ->update([
                         'name' => $validatedData['name'],
                         'email' => $validatedData['email'],
+                        'username' => $validatedData['username']
                     ]);
 
             Member::where('user_id', auth()->user()->id)

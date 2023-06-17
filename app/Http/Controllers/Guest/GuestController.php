@@ -138,4 +138,16 @@ class GuestController extends Controller
         $param = [];
         return view('guest.profile', $param);
     }
+
+    public function account(Request $request)
+    {
+        $param = [];
+        return view('guest.account', $param);
+    }
+
+    public function myProfile(Request $request)
+    {
+        $param['profile'] = Member::with('user')->where('user_id', auth()->user()->id)->first();
+        return view('guest.myProfile', $param);
+    }
 }
